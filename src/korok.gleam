@@ -1,5 +1,17 @@
 import gleam/io
+import gleam/erlang/process
+import gleam/option.{None}
+import gleam/otp/actor
+import glisten
 
 pub fn main() {
-  io.println("Hello from korok!")
+  io.println("Logs from the program will appear here.")
+
+  let assert OK(_) = 
+    glisten.handler(fn(_conn) { #(Nil, None) }, fn(_msg, state, _conn) {
+      actor.continue(state)
+    })
+    |> glisten.serve(6379)
+
+  process.sleep_forever()
 }
