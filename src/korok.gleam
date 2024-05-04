@@ -7,7 +7,7 @@ import glisten
 pub fn main() {
   io.println("Logs from the program will appear here.")
 
-  let assert OK(_) = 
+  let assert Ok(_) = 
     glisten.handler(fn(_conn) { #(Nil, None) }, fn(_msg, state, _conn) {
       actor.continue(state)
     })
